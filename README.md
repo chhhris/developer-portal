@@ -1,24 +1,16 @@
-# README
+# Pls README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Instructions for running
+* Install repo `$ git clone git@github.com:chhhris/developer-portal.git`
+* Load dependencies `$ bundle install` (assuming you have Bundler installed!)
+* Create database `$ rails db:create` (double check Rails 5 `s/rack/rails` syntax works!)
+* Update database `$ rails db:migrate` (if necessary)
+* Run server `$ rails s`
 
-Things you may want to cover:
+## Specs
+* Run spec suite `$ rspec spec`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Application details
+* Rails 5
+* PostgreSQL
+* No views (for now)
