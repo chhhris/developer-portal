@@ -1,13 +1,15 @@
-class Api::V1::ApplicationsController
+class Api::V1::ApplicationsController < ActionController::API
 
   # GET /applications
   def index
-    if params[:developer_key].present?
-      dev = Developer.find_by_key(params[:developer_key])
+    if params[:developer_username].present?
+      dev = Developer.find_by_key(params[:developer_username])
       applications = dev.applications
     else
       applications = Application.all
     end
+
+
 
     render json: applications
   end

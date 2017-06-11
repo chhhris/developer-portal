@@ -5,6 +5,8 @@ class Developer < ApplicationRecord
 
   has_many :applications, dependent: :destroy
 
+  # validations around :username format
+
   # `Password` via bcrypt
   def password
     @password ||= Password.new(password_hash)
