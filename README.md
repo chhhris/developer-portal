@@ -7,6 +7,11 @@
 * Update database `$ rails db:migrate`
 * Run server `$ rails s`
 
+## Usage (API Documentation)
+* List of all applications `/applications`
+* List of developers (admin only) `/developers`
+* Find a developer `/developers/:username` (returns developer resource + list of developer's applications by :key)
+
 ## Specs
 * Run spec suite `$ rspec spec`
 
