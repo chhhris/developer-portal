@@ -23,4 +23,6 @@ json.data do
 
     json.link api_v1_application_url(application.id)
   end
+
+  json.link api_v1_developer_url(@developer.id)
 end

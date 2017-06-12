@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: applications
+#
+#  id             :integer
+#  name           :string
+#  key            :string
+#  description    :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+
 class Application < ApplicationRecord
   belongs_to :developer
 

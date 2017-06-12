@@ -17,8 +17,9 @@
 * PostgreSQL
 * REST-ful / HTML-less (no client (frontend); using [Jbuilder templates](https://github.com/rails/jbuilder) to format `json` responses)
 
-* Use SSL for production.
 
+### Known issues / Design considerations
+* Use SSL for production.
 
 ## _Developer Portal_ API Documentation
 * Roughly following the [jsonapi.org](http://jsonapi.org/format/) specification for server response formats.
@@ -40,7 +41,7 @@
         "count": 3,
         "ids": [2342, 123233, 897822]
       },
-      "link": "http://localhost:3000/api/v1/developers/3"
+      "link": "http://localhost:3000/api/v1/developers/2"
     },
     ...
   ]
@@ -70,8 +71,9 @@
           "key": "a_silverbacks_life",
           "description": "An inside look at life as the most badass ape in the ape kingdom."
         },
-        "link": "http://localhost:3000/api/v1/applications/3"
+        "link": "http://localhost:3000/api/v1/applications/5"
       },
+      "link": "http://localhost:3000/api/v1/developers/2"
       ...
     ]
   }

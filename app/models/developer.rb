@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: developers
+#
+#  id             :integer
+#  username       :string
+#  email          :string
+#  password_hash  :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+
 require 'bcrypt'
 
 class Developer < ApplicationRecord
