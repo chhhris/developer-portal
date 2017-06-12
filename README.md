@@ -17,6 +17,9 @@
 * PostgreSQL
 * REST-ful / HTML-less (no client (frontend); using [Jbuilder templates](https://github.com/rails/jbuilder) to format `json` responses)
 
+* Use SSL for production.
+
+
 ## _Developer Portal_ API Documentation
 * Roughly following the [jsonapi.org](http://jsonapi.org/format/) specification for server response formats.
 
