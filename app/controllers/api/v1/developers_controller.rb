@@ -16,7 +16,8 @@ class Api::V1::DevelopersController < ActionController::API
     @developer = Developer.new(developer_params)
 
     if @developer.save
-      render json: include_applications(@developer), status: :created
+      # check if this works
+      render :show, status: :created
     else
       render json: @developer.errors, status: :unprocessable_entity
     end
@@ -25,7 +26,8 @@ class Api::V1::DevelopersController < ActionController::API
   # PATCH/PUT /developers/1
   def update
     if @developer.update(developer_params)
-      render json: include_applications(@developer), status: :ok
+      # check if this works
+      render :show, @developer, status: :ok
     else
       render json: @developer.errors, status: :unprocessable_entity
     end

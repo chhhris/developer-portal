@@ -6,4 +6,7 @@ Rails.application.routes.draw do
       resources :applications
     end
   end
+
+  match '/404', :to => 'errors#not_found', :via => :all
+  match '/500', :to => 'errors#exception', :via => :all
 end

@@ -7,7 +7,7 @@ class Developer < ApplicationRecord
 
   # validations around :username format
 
-  # `Password` via bcrypt
+  # Password hashing via bcrypt
   def password
     @password ||= Password.new(password_hash)
   end
