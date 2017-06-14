@@ -1,5 +1,4 @@
 class Api::V1::DevelopersController < ActionController::API
-  before_action :set_developer, only: [:show, :update, :destroy]
 
   # GET /developers
   def index
@@ -8,7 +7,7 @@ class Api::V1::DevelopersController < ActionController::API
 
   # GET /developers/1
   def show
-    # render show.jbuilder
+    set_developer
   end
 
   # POST /developers
@@ -16,7 +15,6 @@ class Api::V1::DevelopersController < ActionController::API
     @developer = Developer.new(developer_params)
 
     if @developer.save
-      # check if this works
       render :show, status: :created
     else
       render json: @developer.errors, status: :unprocessable_entity
@@ -25,9 +23,9 @@ class Api::V1::DevelopersController < ActionController::API
 
   # PATCH/PUT /developers/1
   def update
+    set_developer
     if @developer.update(developer_params)
-      # check if this works
-      render :show, @developer, status: :ok
+      render :show, status: :ok
     else
       render json: @developer.errors, status: :unprocessable_entity
     end
@@ -35,6 +33,7 @@ class Api::V1::DevelopersController < ActionController::API
 
   # DELETE /developers/1
   def destroy
+    set_developer
     @developer.destroy
   end
 
@@ -45,6 +44,6 @@ class Api::V1::DevelopersController < ActionController::API
   end
 
   def developer_params
-    params.require(:developer).permit(:username, :password_hash, :email)
+    params.require(:developer).permit(:username, :password, :email)
   end
 end

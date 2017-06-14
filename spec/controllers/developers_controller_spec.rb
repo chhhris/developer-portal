@@ -10,7 +10,6 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
       password: 'bananas123'
     }
   end
-  let(:invalid_attributes) {{ foo: 'bar' }}
   let!(:developer) { FactoryGirl.create(:developer) }
   let(:json) { JSON.parse(response.body) }
 
@@ -42,23 +41,25 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
     context 'with valid params' do
       it 'creates a new Developer' do
         expect {
-          post :create, params: {developer: valid_attributes}, session: valid_session
+          post :create, params: { developer: valid_attributes } #, session: valid_session
         }.to change(Developer, :count).by(1)
       end
 
       it 'renders a JSON response with the new developer' do
-
-        post :create, params: {developer: valid_attributes}, session: valid_session
+        post :create, params: { developer: valid_attributes } #, session: valid_session
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json')
-        expect(response.location).to eq(developer_url(Developer.last))
+        expect(json['data']['attributes']).to eq(
+          { "username" => valid_attributes[:username], "email" => valid_attributes[:email] }
+        )
       end
     end
 
     context 'with invalid params' do
-      it 'renders a JSON response with errors for the new developer' do
+      let(:invalid_attributes) {{ foo: 'bar' }}
 
-        post :create, params: {developer: invalid_attributes}, session: valid_session
+      it 'renders a JSON response with errors for the new developer' do
+        post :create, params: { developer: invalid_attributes } #, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -67,31 +68,37 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
 
   describe 'PUT #update' do
     context 'with valid params' do
-      let(:new_attributes) {
-        skip('Add a hash of attributes valid for your model')
-      }
+      let(:new_attributes) do
+        {
+          username: 'another_silverback',
+          email: 'one.of.the.greatest.apes@gmail.com'
+        }
+      end
 
       it 'updates the requested developer' do
-        developer = Developer.create! valid_attributes
-        put :update, params: {id: developer.to_param, developer: new_attributes}, session: valid_session
+        expect(developer.username).to eq('king_kong')
+        expect(developer.email).to eq('king@kong.io')
+
+        put :update, params: { id: developer.to_param, developer: new_attributes } #, session: valid_session
         developer.reload
-        skip('Add assertions for updated state')
+
+        expect(json['data']['attributes']).to eq(
+          { "username" => new_attributes[:username], "email" => new_attributes[:email] }
+        )
       end
 
       it 'renders a JSON response with the developer' do
-        developer = Developer.create! valid_attributes
-
-        put :update, params: {id: developer.to_param, developer: valid_attributes}, session: valid_session
+        put :update, params: { id: developer.to_param, developer: valid_attributes } #, session: valid_session
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
       end
     end
 
     context 'with invalid params' do
-      it 'renders a JSON response with errors for the developer' do
-        developer = Developer.create! valid_attributes
+      let(:invalid_attributes) {{ username: 'M a n y    s p a c e s' }}
 
-        put :update, params: {id: developer.to_param, developer: invalid_attributes}, session: valid_session
+      it 'renders a JSON response with errors for the developer' do
+        put :update, params: { id: developer.to_param, developer: invalid_attributes } #, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -102,7 +109,7 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
     it 'destroys the requested developer' do
       developer = Developer.create! valid_attributes
       expect {
-        delete :destroy, params: {id: developer.to_param}, session: valid_session
+        delete :destroy, params: {id: developer.to_param} #, session: valid_session
       }.to change(Developer, :count).by(-1)
     end
   end
