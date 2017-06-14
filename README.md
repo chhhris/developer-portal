@@ -16,6 +16,7 @@
 * Rails 5
 * PostgreSQL
 * REST-ful / HTML-less (no client (frontend); using [Jbuilder templates](https://github.com/rails/jbuilder) to format `json` responses)
+* Rate limiting via [Rack::Attack gem](https://github.com/kickstarter/rack-attack) from Kickstarter
 
 
 ### Known issues / Design considerations
