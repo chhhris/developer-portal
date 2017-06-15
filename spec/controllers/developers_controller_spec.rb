@@ -16,7 +16,7 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
 
   before {
     controller.class.skip_before_action :authenticate_developer!, raise: false
-    allow(controller).to receive(:current_user) { developer }
+    allow(controller).to receive(:current_user).and_return(developer)
   }
 
   describe 'GET #index' do
@@ -34,7 +34,7 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
 
   describe 'GET #show' do
     it 'returns a success response' do
-      get :show, params: { id: developer.to_param } #, session: valid_session
+      get :show, params: { id: developer.to_param }
       expect(response).to be_success
       expect(json['data'].keys).to eq(["type", "id", "created_at", "updated_at", "attributes", "applications", "link"])
       expect(json['data']['attributes']).to eq({ "username" => developer.username, "email" => developer.email })
@@ -45,12 +45,12 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
     context 'with valid params' do
       it 'creates a new Developer' do
         expect {
-          post :create, params: { developer: valid_attributes } #, session: valid_session
+          post :create, params: { developer: valid_attributes }
         }.to change(Developer, :count).by(1)
       end
 
       it 'renders a JSON response with the new developer' do
-        post :create, params: { developer: valid_attributes } #, session: valid_session
+        post :create, params: { developer: valid_attributes }
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json')
         expect(json['data']['attributes']).to eq(
@@ -63,7 +63,7 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
       let(:invalid_attributes) {{ foo: 'bar' }}
 
       it 'renders a JSON response with errors for the new developer' do
-        post :create, params: { developer: invalid_attributes } #, session: valid_session
+        post :create, params: { developer: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -83,7 +83,7 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
         expect(developer.username).to eq('king_kong')
         expect(developer.email).to eq('king@kong.io')
 
-        put :update, params: { id: developer.to_param, developer: new_attributes } #, session: valid_session
+        put :update, params: { id: developer.to_param, developer: new_attributes }
         developer.reload
 
         expect(json['data']['attributes']).to eq(
@@ -92,7 +92,7 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
       end
 
       it 'renders a JSON response with the developer' do
-        put :update, params: { id: developer.to_param, developer: valid_attributes } #, session: valid_session
+        put :update, params: { id: developer.to_param, developer: valid_attributes }
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
       end
@@ -102,7 +102,7 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
       let(:invalid_attributes) {{ username: 'M a n y    s p a c e s' }}
 
       it 'renders a JSON response with errors for the developer' do
-        put :update, params: { id: developer.to_param, developer: invalid_attributes } #, session: valid_session
+        put :update, params: { id: developer.to_param, developer: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -111,9 +111,8 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'destroys the requested developer' do
-      developer = Developer.create! valid_attributes
       expect {
-        delete :destroy, params: {id: developer.to_param} #, session: valid_session
+        delete :destroy, params: {id: developer.to_param}
       }.to change(Developer, :count).by(-1)
     end
   end

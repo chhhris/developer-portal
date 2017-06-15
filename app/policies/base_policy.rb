@@ -6,22 +6,6 @@ class BasePolicy
     @record = record
   end
 
-  def index?
-    true
-  end
-
-  def show?
-    scope.where(id: record.id).exists?
-  end
-
-  def create?
-    true
-  end
-
-  def new?
-    create?
-  end
-
   def scope
     Pundit.policy_scope!(developer, record.class)
   end
