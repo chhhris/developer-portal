@@ -1,4 +1,4 @@
-class Api::V1::ApplicationsController < ActionController::API
+class Api::V1::ApplicationsController < Api::V1::BaseController
 
   # GET /applications
   def index

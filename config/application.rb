@@ -9,11 +9,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
-# require "sprockets/railtie"
-# require "rails/test_unit/railtie"
 
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module DeveloperPortal
@@ -24,5 +20,6 @@ module DeveloperPortal
     config.exceptions_app = self.routes
     # rate limiting
     config.middleware.use Rack::Attack
+    config.active_record.default_timezone = :utc
   end
 end

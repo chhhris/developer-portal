@@ -1,4 +1,4 @@
-class Api::V1::DevelopersController < ActionController::API
+class Api::V1::DevelopersController < Api::V1::BaseController
 
   # GET /developers
   def index

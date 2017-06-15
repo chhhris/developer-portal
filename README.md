@@ -10,6 +10,7 @@
 * Run server `$ rails s`
 
 ### Test suite
+* '$ rake db:test:prepare'
 * Run spec suite `$ rspec spec`
 
 ### Application details
@@ -18,9 +19,16 @@
 * REST-ful / HTML-less (no client (frontend); using [Jbuilder templates](https://github.com/rails/jbuilder) to format `json` responses)
 * Rate limiting via [Rack::Attack gem](https://github.com/kickstarter/rack-attack) from Kickstarter
 
+## TODO
+* Authentication (https://labs.kollegorna.se/blog/2015/04/build-an-api-now/ with https://github.com/mgomes/api_auth gem)
+* Authorization with pundit (that only relevant Developer can edit their own applications)
+* How to test Rack::Attack  ??
+
 
 ### Known issues / Design considerations
-* Use SSL for production.
+* Use SSL for production and development.
+* CORS
+* Pagination
 
 ## _Developer Portal_ API Documentation
 * Roughly following the [jsonapi.org](http://jsonapi.org/format/) specification for server response formats.

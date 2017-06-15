@@ -10,14 +10,15 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
       password: 'bananas123'
     }
   end
+
   let!(:developer) { FactoryGirl.create(:developer) }
   let(:json) { JSON.parse(response.body) }
 
-  # let(:valid_session) { {} }
+  before { controller.class.skip_before_action :authenticate_developer!, raise: false }
 
   describe 'GET #index' do
     it 'returns a success response' do
-      get :index, format: :json #, session: valid_session
+      get :index, format: :json
 
       expect(response).to be_success
 

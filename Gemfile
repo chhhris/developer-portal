@@ -8,14 +8,20 @@ end
 gem 'rails', '~> 5.1.1'
 gem 'pg'
 gem 'jbuilder', '~> 2.5'
+gem 'rest-client'
 gem 'puma', '~> 3.7'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rack-attack'
+# HMAC authentication
+gem 'api-auth'
+# Authorization
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
 
 group :development do
