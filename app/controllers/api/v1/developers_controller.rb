@@ -1,4 +1,5 @@
 class Api::V1::DevelopersController < Api::V1::BaseController
+  skip_before_action :authenticate_developer!, only: :create
 
   # GET /developers
   def index
