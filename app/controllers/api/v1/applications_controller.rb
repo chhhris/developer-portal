@@ -1,5 +1,5 @@
 class Api::V1::ApplicationsController < Api::V1::BaseController
-  # skip_before_action :authenticate_developer!, only: [:index, :show]
+  skip_before_action :authenticate_developer!, only: [:index, :show]
 
   # GET /applications
   def index

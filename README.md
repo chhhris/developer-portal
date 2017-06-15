@@ -20,14 +20,15 @@
 * JSON formatted via [Jbuilder templates](https://github.com/rails/jbuilder)
 * Authentication via [API Auth](https://github.com/mgomes/api_auth)
 * Authorization via [Pundit](https://github.com/elabs/pundit)
-* Rate limiting via [Rack::Attack gem](https://github.com/kickstarter/rack-attack) from Kickstarter
+* Rate limiting via [Rack::Attack](https://github.com/kickstarter/rack-attack) (Kickstarter)
 
 ### Known issues / Design considerations / To Do's
-* Implement SSL for production and development. In development this would require generating a self signed SSL cert (key, csr and certificate), updating configs to force SSL in prod and dev files, and finally if you are using OS X you would add the cert to Keychain Access.
+* Implement SSL for production and development. In development this would require generating a self signed SSL cert (key, csr and certificate), updating configs to force SSL in prod and dev files, add the cert to Keychain Access (OS X).
 * Enable CORS (cross origin HTTP requests) if frontend client and backend are hosted on different domains.
+* Refactor / rethink how API key / auth token is requested and returned to user.
 * Paginate API response data.
 * Add ApplicationsController specs (I ran out of time; DevelopersController specs are representative).
-* Add specs to test Authorization with Pundit (that only relevant Developer can edit their own applications)
+* Add specs to test Authorization with Pundit (that only the Application's Developer can edit their own applications)
 * Add specs to test Rate Limiting. Sample spec e.g.
 ```
 describe "throttle excessive requests by IP address" do
@@ -49,8 +50,8 @@ end
 ## _Developer Portal_ API Documentation
 
 For new clients
-1. Create a developer account `POST /api/v1/developers` (requires `username`, `email` and `password`)
-2. Use email and password to retrieve API Key
+1. Create a developer account `GET /api/v1/developers` (required fields: `username`, `email` and `password`)
+2. Use email and password to retrieve API Key `GET /api/v1/tokens` supplying `email` and `password` as request parameters. This returns Developer object with :id and :api_key
 3. Use developer id and api_key to authenticate API requests
 
 Example signed GET request using RestClient.
@@ -135,3 +136,7 @@ DELETE  /api/v1/applications/:id   applications#destroy
     ]
   }
 }
+```
+
+## Questions? Concerns? Feedback?
+Would love to [hear from you](https://twitter.com/chhhris)!
