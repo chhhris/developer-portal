@@ -9,6 +9,7 @@ class Api::V1::DevelopersController < Api::V1::BaseController
   # GET /developers/1
   def show
     set_developer
+    authorize @developer
   end
 
   # POST /developers
@@ -25,6 +26,7 @@ class Api::V1::DevelopersController < Api::V1::BaseController
   # PATCH/PUT /developers/1
   def update
     set_developer
+    authorize @developer
     if @developer.update(developer_params)
       render :show, status: :ok
     else
@@ -35,6 +37,7 @@ class Api::V1::DevelopersController < Api::V1::BaseController
   # DELETE /developers/1
   def destroy
     set_developer
+    authorize @developer
     @developer.destroy
   end
 

@@ -3,7 +3,7 @@ class Api::V1::BaseController < ActionController::API
 
   include Pundit
 
-  before_action :authenticate_developer!
+  # before_action :authenticate_developer!
 
   def authenticate_developer!
     current_user = Developer.find(ApiAuth.access_id(request))

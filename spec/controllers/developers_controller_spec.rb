@@ -14,7 +14,10 @@ RSpec.describe Api::V1::DevelopersController, type: :controller do
   let!(:developer) { FactoryGirl.create(:developer) }
   let(:json) { JSON.parse(response.body) }
 
-  before { controller.class.skip_before_action :authenticate_developer!, raise: false }
+  before {
+    controller.class.skip_before_action :authenticate_developer!, raise: false
+    allow(controller).to receive(:current_user) { developer }
+  }
 
   describe 'GET #index' do
     it 'returns a success response' do

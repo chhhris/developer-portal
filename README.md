@@ -9,14 +9,17 @@
 * Update database `$ rails db:migrate` if necessary
 * Run server `$ rails s`
 
-### Test suite
-* `$ rake db:test:prepare`
-* Run spec suite `$ rspec spec`
+### Running test suite
+* Ensure test db is setup `$ rake db:test:prepare`
+* Run rspec `$ rspec spec`
 
 ### Application details
 * Rails 5
 * PostgreSQL
-* REST-ful / HTML-less (no client (frontend); using [Jbuilder templates](https://github.com/rails/jbuilder) to format `json` responses)
+* RESTful
+* JSON formatted via [Jbuilder templates](https://github.com/rails/jbuilder)
+* Authentication via [API Auth](https://github.com/mgomes/api_auth)
+* Authorization via [Pundit](https://github.com/elabs/pundit)
 * Rate limiting via [Rack::Attack gem](https://github.com/kickstarter/rack-attack) from Kickstarter
 
 ### Known issues / Design considerations / To Do's

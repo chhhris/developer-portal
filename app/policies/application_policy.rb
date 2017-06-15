@@ -1,53 +1,17 @@
-class ApplicationPolicy
-  attr_reader :user, :record
+class ApplicationPolicy < BasePolicy
+  attr_reader :user, :application
 
-  def initialize(user, record)
+  def initialize(user, application)
     @user = user
-    @record = record
-  end
-
-  def index?
-    false
-  end
-
-  def show?
-    scope.where(:id => record.id).exists?
-  end
-
-  def create?
-    false
-  end
-
-  def new?
-    create?
+    @application = application
   end
 
   def update?
-    false
-  end
-
-  def edit?
-    update?
+    user.id == application.developer.id && user.authentication_token == application.developer.authentication_token
   end
 
   def destroy?
-    false
+    update?
   end
 
-  def scope
-    Pundit.policy_scope!(user, record.class)
-  end
-
-  class Scope
-    attr_reader :user, :scope
-
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
-
-    def resolve
-      scope
-    end
-  end
 end
