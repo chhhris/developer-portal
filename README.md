@@ -50,9 +50,9 @@ end
 ## _Developer Portal_ API Documentation
 
 For new clients
-1. Create a developer account `GET /api/v1/developers` (required fields: `username`, `email` and `password`)
+1. Create a developer account `POST /api/v1/developers` (required fields: `username`, `email` and `password`)
 2. Use email and password to retrieve API Key `GET /api/v1/tokens` supplying `email` and `password` as request parameters. This returns Developer object with :id and :api_key
-3. Use developer id and api_key to authenticate API requests
+3. Use developer :id and :api_key to HMAC encrypt / authenticate API requests
 
 Example signed GET request using RestClient.
 ```
@@ -71,6 +71,7 @@ GET     /api/v1/developers/:id     developers#show
 PATCH   /api/v1/developers/:id     developers#update
 PUT     /api/v1/developers/:id     developers#update
 DELETE  /api/v1/developers/:id     developers#destroy
+
 GET     /api/v1/applications       applications#index
 POST    /api/v1/applications       applications#create
 GET     /api/v1/applications/:id   applications#show
@@ -106,7 +107,7 @@ DELETE  /api/v1/applications/:id   applications#destroy
 }
 ```
 
-#### **GET** `/developers/:user_id`
+#### **GET** `/developers/:id`
 ```
 {
   "data": {
@@ -131,9 +132,9 @@ DELETE  /api/v1/applications/:id   applications#destroy
         },
         "link": "http://localhost:3000/api/v1/applications/5"
       },
-      "link": "http://localhost:3000/api/v1/developers/2"
       ...
-    ]
+    ],
+    "link": "http://localhost:3000/api/v1/developers/2"
   }
 }
 ```
